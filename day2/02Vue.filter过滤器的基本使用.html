@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 1.导入vue的包-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+</head>
+<body>
+    <div id ="app">
+        <p>{{msg | msgFormat('邪恶') | msgFormat2}}</p>
+    </div>
+    <script>
+    //         // //过滤器的定义语法
+    // // Vue.filter('过滤器的名称',function(){})
+
+    // //过滤器中的function，第一个参数已经被固定死了，永远都是过滤器管道符前面 传递过来的数据
+    // Vue.filter('过滤器的名称',function(data){
+    //     return data + '123'
+    // })
+
+    // 定义一个Vue全局的过滤器
+    Vue.filter('msgFormat',function(msg,arg){
+        //字符串的 replace方法，第一个参数除了可写一个字符串参数之外，还可以定义一个正则
+        // return msg.replace('单纯','邪恶')
+        return msg.replace(/单纯/g,arg)
+    })
+
+    Vue.filter('msgFormat2',function(msg){
+        return msg + '++++++++++'
+    })
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            msg:'曾经我也是一个单纯的少年，单纯的我，傻傻的问，谁是世界上最单纯的男人'
+        }
+    })
+    </script>
+</body>
+</html>
+
+
+
+
+
+<!--  过滤器调用时候的格式 {{name|过滤器的名称}}-->

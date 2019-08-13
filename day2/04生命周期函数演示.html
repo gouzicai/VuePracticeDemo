@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 1.导入vue的包-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+</head>
+<body>
+    <div id ="app">
+        <p id="p">{{msg}}</p>
+        <input type="button" value="修改msg" @click="msg = '别学了洗洗睡吧'">
+    </div>
+    <script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            msg:'欢迎学习Vue'
+        },
+        methods:{
+            show(){
+                console.log(this.msg);
+            }
+        },
+
+        beforeCreate(){//遇到的第一个生命周期函数，表示实例完全被创建出来之前，会执行它，这个时候data和methods里面的数据还没有被加载出来，控制台输出的是undefined
+            // console.log(this.msg); //undefined
+            // this.show();//报错
+        },
+        created(){//遇到的第二个生命周期函数,created调用的时候，data和methods里面的方法都已经被加载了
+            console.log(this.msg);  //欢迎学习Vue
+            this.show();            //欢迎学习Vue
+        },
+        beforeMount(){//遇到的第三个生命周期函数，表示模版已经编译完成了，还没有把模版渲染到页面中
+            console.log(document.getElementById('p').innerText);  //{{msg}}
+        },
+        mounted(){//遇到的第四个生命周期函数，模版已经渲染到页面中，用户已经可以看到渲染好的页面   是实例创建周期的最后一个生命周期函数，表示实例已经完全创建好了，保存在内存中
+            console.log(document.getElementById('p').innerText);  //欢迎学习Vue
+        },
+        //上面是组件创建期间的声明函数
+        //下面是组件运行期间的声明周期函数
+        beforeUpdate(){ //这时候表示数据已经被更新了，界面还没有更新
+            console.log(document.getElementById('p').innerText);  //欢迎学习Vue
+            console.log(this.msg);                                //别学了洗洗睡吧
+        },
+        
+        updated(){      //数据和界面同步，都被更新了
+            console.log(document.getElementById('p').innerText);  //别学了洗洗睡吧
+            console.log(this.msg);                                //别学了洗洗睡吧
+        },
+
+        //beforeDestroy(){},//Vue实例已经从运行阶段进入到销毁阶段，身上的data,methods,filer...还处于可用状态，没有真正执行销毁的过程
+        //destroyed(){}//组件已经被完全销毁了，此时所有都不可用
+    })
+    </script>
+</body>
+</html>

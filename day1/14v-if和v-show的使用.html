@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 1.导入vue的包-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+</head>
+<body>
+    <div id ="app">
+        <input type="button" value="点击切换flag" @click="toggle">
+        <!-- <input type="button" value="点击切换flag" @click="flag=!flag"> -->
+        <!-- v-if 会每次进行删除和创建 切换消耗高-->
+        <h3 v-if="flag">这是用v-if控制的元素</h3>
+        <!-- v-show 不会进行删除和创建，只是切换了display的样式  初始渲染消耗高-->
+        <h3 v-show="flag">这是用v-show控制的元素</h3>
+    </div>
+    <script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            flag:true
+        },
+        methods:{
+            toggle(){
+                this.flag=!this.flag;
+            } 
+        }
+    })
+    </script>
+</body>
+</html>

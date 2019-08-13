@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js'></script>
+    <script src='https://unpkg.com/axios/dist/axios.min.js'></script>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css'>
+</head>
+<body>
+    <div id ='app'>
+        <mycom></mycom>
+        <mycom2></mycom2>
+        <login></login>
+    </div>
+
+    <template id = tmp1>
+        <div>
+            <h1>这是通过template元素在外部定义的组件结构，这个方式有代码提示和高亮</h1>
+        </div>
+    </template>
+    <script>
+        Vue.component('mycom',{
+            //组件的template属性只想的模本内容，只能有一个根元素
+            template:'<h3>这是使用Vue.component创建的组件</h3>'
+        })
+
+        Vue.component('mycom2',{
+            template:'#tmp1'
+        })
+
+        var vm = new Vue({
+            el:'#app',
+            data:{},
+            methods:{},
+            components:{//定义实例内部私有的组件
+                login:{
+                    template:'<h1>这是私有的login组件</h1>'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

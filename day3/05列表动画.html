@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js'></script>
+    <script src='https://unpkg.com/axios/dist/axios.min.js'></script>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css'>
+    <style>
+        li{
+            border: 1px dashed #999;
+            margin: 5px;
+            line-height: 35px;
+            padding-left:5px;
+            font-size: 12px;
+            width:100%;
+        }
+
+        li:hover{
+            background-color: hotpink;
+            transition: all 0.8s ease;
+        }
+
+
+        .group-enter,
+        .group-leave-to{
+            opacity: 0;
+            transform: translateY(80px); 
+        }
+
+        .group-enter-active,
+        .group-leave-active{
+            transition:all 0.6s ease;
+        }
+
+
+        /* move和leave-active配合使用，可以使其他元素不必等待动画做完再移动 */
+        .group-move{
+            transition:all 0.6s ease;
+        }
+
+        .group-leave-active{
+            position:absolute;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id ='app'>
+        <div>
+            <label>
+                ID:
+                <input type="text" v-model="id">
+            </label>
+            <label>
+                Name:
+                <input type="text" v-model="name">
+            </label>
+            <input type="button" @click ="add()">
+        </div>
+        <!-- <ul> -->
+            <!-- 在实现列表过渡的时候，如果需要过渡的元素，是通过v-for循环渲染出来的，不能使用transition包裹，需要使用transitionGroup
+            <li v-for="item in list" :key="item.id">
+                {{item.id}} --- {{item.name}}
+            </li> -->
+            
+            <!-- 如果要为v-for循环创建的元素创建动画，必须为每一个元素设置：key属性 -->
+            <!-- appear可以初始的时候就播放一次动画 -->
+            <!-- tag标签可以指定transition-group渲染为什么样的元素，不设置的话默认是span -->
+            <transition-group name="group" appear tag="ul">
+                <li v-for="(item,i) in list" :key="item.id" @click="del(item.id)">
+                    {{item.id}} --- {{item.name}}
+                </li>
+            </transition-group>
+        <!-- </ul> -->
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                id:"",
+                name:"",
+                list:[
+                    {id:1,name:'赵高'},
+                    {id:2,name:'秦桧'},
+                    {id:3,name:'严嵩'},
+                    {id:4,name:'魏忠贤'},
+                ]
+            },
+            methods:{
+                add(){
+                    this.list.push({id:this.id,name:this.name});
+                    this.id = this.name = ""
+                },
+                del(id){
+                    for(let i = 0;i < this.list.length;++i){
+                        if(this.list[i].id === id){
+                            this.list.splice(i,1);
+                        }   
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

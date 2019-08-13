@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js'></script>
+    <script src='https://unpkg.com/axios/dist/axios.min.js'></script>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css'>
+</head>
+<body>
+    <div id ='app'>
+        <!-- 如果要使用组件，直接把组件的名称，以HTML标签的形式，引入到界面中即可 如果申明组件的时候用了驼峰式的命名，使用的时候将大写改为-加小写，如：  C  ->  -c -->
+        <my-com2></my-com2>
+    </div>
+    <script>
+        //1.1通过Vue.extend来创建全局的Vue组件
+        var com1 = Vue.extend({
+            template:'<h3>这是使用Vue.extend创建的组件</h3>' //通过template属性，指定了组件要展示的HTML结构
+        })
+        //1.2 使用Vue.component('组件的名称',创建出来的模版对象)
+        Vue.component('myCom1',com1)
+
+        //第二种方式，两步和为一步；，省去申明一个变量
+        Vue.component('myCom2',Vue.extend({
+            template:'<h3>这是使用Vue.extend创建的组件</h3>' //通过template属性，指定了组件要展示的HTML结构
+        }))
+
+        var vm = new Vue({
+            el:'#app',
+            data:{},
+            methods:{}
+        })
+    </script>
+</body>
+</html>

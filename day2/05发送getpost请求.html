@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 1.导入vue的包-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <label>
+            账号:
+            <input type="text" v-model="username">
+        </label>
+        <label>
+            密码：
+            <input type="password" v-model="password">
+        </label>
+
+        <input type="submit" value="登录" @click="postData()">
+
+        <div>
+            <li v-for="(item,i) in array">{{item}}</li>
+        </div>
+    </div>
+    <script>
+        //const axios = require('axios');
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                username: '',
+                password: '',
+                array: []
+            },
+            created() {
+                console.log('getdata');
+                this.getData();
+            },
+            methods: {
+                postData() {
+                    axios.post('/user', {
+                        userName: this.username,
+                        password: this.password
+                    })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                },
+
+                getData() {
+                    // axios.get("https://www.easy-mock.com/mock/5d4a5bb7ee89405f39e4eb24/example/mock").then(res => {
+                    //     this.array = res.data.data.projects;
+                    // })
+                    axios.get("https://www.easy-mock.com/mock/5d4a5bb7ee89405f39e4eb24/example/cars").then(res => {
+                        console.log(res);
+                        this.array = res.data.data.list;
+                    })
+                },
+                
+                getRequest() {
+                    console.log(this.username + this.password);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

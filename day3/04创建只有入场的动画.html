@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js'></script>
+    <script src='https://unpkg.com/axios/dist/axios.min.js'></script>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css'>
+    <style>
+        .ball{
+            width: 15px;
+            height:15px;
+            border-radius:50%;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id ='app'>
+        <input type="button" value="加入购物车" @click="flag = !flag">
+        <transition 
+            @before-enter="beforeEnter"
+            @enter="enter"
+            @after-enter="afterEnter"
+        > 
+            <div class="ball" v-show="flag"></div>
+        </transition>
+    </div>
+    <script>
+
+        Vue.directive('focus',function(el){})
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                flag:false
+            },
+            methods:{
+                //动画钩子函数的第一个参数：el，表示要执行动画的元素，是个原生的js dom对象
+                beforeEnter(el){
+                    //beforeEnter表示动画入场之前，此时，动画尚未开始，可以在beforeEnter 中，设置元素开始动画之前的起始样式
+                    //设置小球的起始位置
+                    el.style.transform = "translate(0,0)"
+                },
+                enter(el,done){
+                    //这句话没有实际的作用，但是如果不写，出不来动画效果
+                    el.offsetWidth
+                    //enter表示动画开始之后的样式，这里，可以设置小球完成动画之后的，结束状态
+                    el.style.transform = "translate(150px,450px)"
+                    el.style.transition = 'all 1s ease'
+
+                    //这里的done，就是afterEnter函数，一个函数的引用
+                    done();
+                },
+                afterEnter(el){
+                    console.log('ok')
+                    this.flag = !this.flag;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

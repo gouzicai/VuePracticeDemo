@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 1.导入vue的包-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+</head>
+<body>
+    <div id ="app">
+        <div>
+            <label>Id:
+                <input type="text" v-model="id">
+            </label>
+            <label>Name:
+                <input type="text" v-model="name">
+            </label>
+            <input type="button" @click = "add">
+
+        </div>
+        <p v-for="item in list" :key="item.id"> 
+            <input type="checkbox">
+            {{ item.name}}-------{{item.id}}
+        </p>
+    </div>
+    <script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            id:'',
+            name:'',
+            list:[
+                { id:1,name:'嬴政'},
+                { id:2,name:'小乔'},
+                { id:3,name:'赵云'},
+                { id:4,name:'韩信'},
+        ]
+        },
+        methods:{
+            add(){
+                this.list.unshift({id:this.id,name:this.name})
+            }  
+        }
+    })
+    </script>
+</body>
+</html>

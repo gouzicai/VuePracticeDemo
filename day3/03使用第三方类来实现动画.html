@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js'></script>
+    <script src='https://unpkg.com/axios/dist/axios.min.js'></script>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="css/animate.css">
+</head>
+<body>
+    <div id='app'>
+        <input type="button" value="toggle" @click="flag = !flag">
+        <!-- 使用:duration来控制入场离场的时间，测试过是截断，不是缩放 -->
+        <transition enter-active-class="bounceIn" leave-active-class="bounceOut" :duration="200">
+            <h3 v-if="flag" >这是一首简单的小情歌</h3>
+        </transition>
+
+        <!-- 可以给:dutarion传入一个对象，可以控制入场时间和出场时间 -->
+        <transition enter-active-class="bounceIn" leave-active-class="bounceOut" :duration="{enter:200,leave:3000}">
+        <h3 v-if="flag" >这是一首简单的小情歌</h3>
+        </transition>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                flag:false
+            },
+            methods:{}
+        })
+    </script>
+</body>
+</html>

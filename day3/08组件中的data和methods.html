@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js'></script>
+    <script src='https://unpkg.com/axios/dist/axios.min.js'></script>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css'>
+</head>
+<body>
+    <div id ='app'>
+        <my-com1></my-com1>
+    </div>
+    <script>
+        //组件可以有自己的data数据
+        //组件的data和实例的data有点不一样，实例中的data可以为一个对象，但是组件中的data必须是一个方法
+        //组件中的data方法一定要返回一个对象
+        //组件中的data使用方法和实例中的一样
+        Vue.component('myCom1',{
+            template:'<h1>这是全局组件---{{msg}}</h1>',
+            data(){
+                return {
+                    msg:'这是组件中的data定义的数据'
+                };
+            }
+        })
+
+
+        var vm = new Vue({
+            el:'#app',
+            data:{},
+            methods:{}
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js'></script>
+    <script src='https://unpkg.com/axios/dist/axios.min.js'></script>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css'>
+</head>
+<body>
+    <div id ='app'>
+        <input type="text" v-model="firstname">+
+        <input type="text" v-model="lastname">=
+        <input type="text" v-model="fullname">
+
+        <p>{{fullname}}</p>
+        <p>{{fullname}}</p>
+        <p>{{fullname}}</p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                firstname:'',
+                lastname:'',
+            },
+            methods:{
+            },
+            computed:{//在computed中，可以定义一些属性，这些属性，叫做计算属性，
+            //计算属性的本质，就是一个方法，只不过我们在使用这些计算属性的时候，
+            //是把它们的名称直接当做属性来使用，并不会把计算属性当做方法来调用
+
+            //计算属性，在引用的时候一定不要加小括号去调用，直接当做普通属性去使用
+            //计算属性function内部所用到的任何data中的数据发生变化，就会立即重新计算这个计算属性的值
+            //计算属性的求值结果，会被缓存起来，方便下次直接使用，如果计算属性方法中，所以来的任何数据，都没有发生过变化，则不会重新对计算属性求值
+
+            //一定要有一个return值
+                fullname:function(){
+                    console.log('test');
+                    return this.firstname + '  ' +this.lastname;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

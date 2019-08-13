@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 1.导入vue的包-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+</head>
+<body>
+    <div id ="app">
+        <h4>{{msg}} </h4>
+
+        <!-- v-bind 只能完成数据的单向绑定，文本框的内容不能同步到msg -->
+        <input type="text" :value="msg">
+        <!-- v-model 能完成数据的双向绑定 可以在input select checkbox textarea...中使用 -->
+        <input type="text" v-model="msg">
+
+    </div>
+    <script>
+    var vm = new Vue({
+        el:"#app",
+        data:{
+            msg:"大家都是好学生，爱敲代码"
+        }
+    })
+    </script>
+</body>
+</html>

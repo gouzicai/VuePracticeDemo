@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 1.导入vue的包-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+</head>
+<body>
+    <div id ="app">
+        <p v-for="(user,i) in list">{{user.id}}---{{user.name}}---索引:{{i}}</p>
+    </div>
+    <script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            list:[
+                {id:1,name:'zzc'},
+                {id:1,name:'pdd'},
+                {id:1,name:'lbw'},
+                {id:1,name:'dsm'},
+            ]
+        }
+    })
+    </script>
+</body>
+</html>

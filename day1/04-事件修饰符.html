@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+    <style>
+    .inner{
+        height:150px;
+        background-color: pink;
+    }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="inner" @click = "div1Handler">
+            <!-- stop 停止向父级冒泡 -->
+            <input type="button" value="戳他" @click.stop = "btnHandler">
+        </div>
+
+        <!-- prevent 阻止默认行为 -->
+        <a href="http://www.baidu.com" @click.prevent = "linkClick">百度一下</a>
+
+        <!-- capture 反向冒泡 -->
+        <div class="inner" @click.capture = "div1Handler">
+                <input type="button" value="戳他" @click = "btnHandler">
+        </div>
+
+        <!-- self 只能通过自身调用，不会通过冒泡调用 -->
+        <div class="inner" @click.self = "div1Handler">
+                <input type="button" value="戳他" @click = "btnHandler">
+        </div>
+
+        <!-- once 只能触发一次 -->
+        <div class="inner" @click.once = "div1Handler">
+                <input type="button" value="戳他" @click.once = "btnHandler">
+        </div>
+
+        
+    </div>
+    <script>
+        var vm = new Vue({
+            //在vm实例中想要调用其他数据或者方法 需要用this
+            el:'#app',
+            data:{
+
+            },
+
+            methods:{
+                div1Handler(){
+                    console.log('divHandler');
+                },
+                
+                btnHandler(){
+                    console.log('btnHandler');
+                    
+                },
+                linkClick(){
+                    console.log('linkClick')
+                }
+            }
+        })
+
+        
+    </script>
+</body>
+</html>

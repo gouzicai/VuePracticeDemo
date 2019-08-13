@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js'></script>
+    <script src='https://unpkg.com/axios/dist/axios.min.js'></script>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css'>
+</head>
+<body>
+    <div id ='app'>
+        <!-- 父组件向子组件传递方法，使用的是，事件绑定机制 -->
+        <com2 @func="show"></com2>
+    </div>
+
+    <template id="tmpl">
+        <div>
+            <h1>这是子组件</h1>
+            <input type="button" value="这是模版的按钮， 点击它，触发父组件传递过来的func 方法" @click="myclick">
+        </div>
+    </template>
+    <script>
+
+        var com2 = {
+            template:'#tmpl',
+            data(){
+                return {
+                    sonmsg:{name:'小头儿子',age : 6}
+                }  
+            },
+            methods:{
+                myclick(){
+                    console.log('ok'); 
+                    //emit触发自定义的事件
+                    this.$emit('func',this.sonmsg,456);
+                }
+            }
+        }
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                datamsgFromSon:""
+            },
+            methods:{
+                show(data,data2){
+                    console.log('调用父组件身上的show方法----'+data+'----'+data2)
+                    this.datamsgFromSon = data;
+                }
+            },
+            components:{
+                com2
+            }
+        })
+    </script>
+</body>
+</html>

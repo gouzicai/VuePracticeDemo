@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 1.导入vue的包-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+</head>
+<body>
+    <div id ="app">
+        <p v-for = "(val,key,i) in user" >{{val}}----{{key}}--{{i}}</p>
+    </div>
+    <script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            user:{
+                id:1,
+                name:'托尼屎大颗',
+                gender:'男'
+            }
+        }
+    })
+    </script>
+</body>
+</html>

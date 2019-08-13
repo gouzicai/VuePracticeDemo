@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 1.导入vue的包-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+    <style>
+    .red{
+        color:red;
+    }
+    .thin{
+        font-weight: 200;
+    }
+    .italic{
+        font-style: italic;
+    }
+    .active{
+        letter-spacing: 0.5em;
+    }
+    </style>
+</head>
+<body>
+    <div id ="app">
+        <h1 class="red thin">这是一个很大的标题!!!</h1>
+        <h1 :class="['thin','red',flag?'active':'']">这是一个很大的标题!!!</h1>
+        <!-- 在数组中用对象来代替三元表达式，提高代码可读性 -->
+        <h1 :class="{thin:true,red:true,italic:true,active:true}">这是一个很大的标题!!!</h1>
+        <h1 :class="classObj">这是一个很大的标题!!!</h1>
+        
+    </div>
+    <script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            flag:true ,
+            classObj:{thin:true,red:true,italic:true,active:true}
+        }
+    })
+    </script>
+</body>
+</html>

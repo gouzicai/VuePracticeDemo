@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id ="app">
+        <!--用v-cloak 能够解决 插值表达式闪烁的问题-->
+        <!--    ++++++++++123++++++++++++++  -->
+        <p v-cloak>++++++++++{{msg}}++++++++++++++ </p> 
+        <!--默认v-test没有闪烁问题
+            加载完成后会完全替换里面的值-->
+        <!-- 123 -->
+        <h4 v-text="msg">++++++++++++++</h4>
+        <!-- <h1>哈哈，我是一个大大的H1</h1> -->
+        <div>
+            {{msg2}}
+        </div>
+        <!-- <h1>哈哈，我是一个大大的H1</h1> -->
+        <h4 v-text="msg2"></h4> 
+        <!-- 哈哈，我是一个大大的H1 -->
+        <h4 v-html="msg2"></h4>
+        <!-- v-bind 用于绑定属性 属性值是js表达式-->
+        <input type="button" value="按钮" v-bind:title="mytitle + '123'">
+        <!-- 可省略v-bind-->
+        <input type="button" value="按钮" :title="mytitle + '123'">
+        <!-- v-on绑定事件-->
+        <input type="button" value="按钮" :title="mytitle + '123'" v-on:click="show" v-on:mouseover="show">
+        <!-- 可以用@替代 -->
+        <input type="button" value="按钮" :title="mytitle + '123'" @click="show" @mouseover="show">
+    </div>
+    <script>
+        var vm =new Vue({
+            el:'#app',
+            data:{
+                msg:'123',
+                msg2:'<h1>哈哈，我是一个大大的H1</h1>',
+                mytitle:'这是一个我自己定义的title'
+            },
+            methods:{
+                show(){
+                    alert('hello');
+                }
+            }
+        })
+    </script>
+</body>
+</html>
